@@ -8,7 +8,7 @@ use App\Http\Resources\ShortLinksCollection;
 use App\Http\Resources\ShortLinksResource;
 use App\Models\V1\ShortLink;
 use App\Repositories\V1\Interfaces\ShortLinksRepositoryInterface;
-
+use Illuminate\Http\Request;
 
 class ShortLinksController extends Controller
 {
@@ -20,11 +20,18 @@ class ShortLinksController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $shortLinkResponce = $this->shortLinksRepository->paginate(
             perPage: config('settings.global.link_list_per_page'),
             orderBy: ['click_count', 'desc'],
+            orWhere: value(function () use ($request) {
+                $conditation = [];
+                if ($request->q) {
+                    $conditation['link'] = ['LIKE', '%' . $request->q . '%'];
+                }
+                return $conditation;
+            })
         );
 
         return apiResponse()
