@@ -2,8 +2,10 @@
 
 namespace App\Models\V1;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ShortLink extends Model
 {
@@ -20,6 +22,11 @@ class ShortLink extends Model
     public function getRouteKeyName(): string
     {
         return 'short_link';
+    }
+
+    public function user() :BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 

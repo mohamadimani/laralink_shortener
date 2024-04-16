@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShortLinksResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,8 @@ class ShortLinksResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "user" => new UserResource($this->user),
-            "link" => $this->link,
-            "short_link" => $this->short_link,
-            "click_count" => $this->click_count,
-            "created_at" => $this->created_at,
+            "name" => $this->name,
+            "email" => $this->email,
         ];
     }
 }
