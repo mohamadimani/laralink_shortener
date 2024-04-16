@@ -13,7 +13,7 @@ class ShortLink extends Model
     protected static function booted()
     {
         static::creating(function ($shortLink) {
-            $shortLink->short_link = makeShortLink();
+            $shortLink->short_link = makeShortLink(config('settings.global.short_link_length'));
         });
     }
 
@@ -21,4 +21,6 @@ class ShortLink extends Model
     {
         return 'short_link';
     }
+
+
 }

@@ -14,6 +14,13 @@ class ShortLinksResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "user_id" => $this->user_id,
+            "link" => $this->link,
+            "short_link" => $this->short_link,
+            "click_count" => $this->click_count,
+            "created_at" => $this->created_at,
+        ];
     }
 }

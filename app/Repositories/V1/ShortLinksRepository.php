@@ -106,4 +106,20 @@ class ShortLinksRepository implements ShortLinksRepositoryInterface
         return $query->orderBy($orderByColumn, $orderByType)->paginate($perPage, $columns);
     }
 
+      /**
+     * update
+     *
+     * @param array $attributes
+     * @param int $id
+     * @param bool $withTrashed
+     * @return Model
+     */
+    public function update(array $attributes, int $id, bool $withTrashed = false): Model
+    {
+        $record = $this->find($id, withTrashed: $withTrashed);
+        $record->update($attributes);
+
+        return $record;
+    }
+
 }
